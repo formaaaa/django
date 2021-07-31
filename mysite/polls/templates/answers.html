@@ -1,8 +1,9 @@
 {% extends "base.html" %}
 {% block content %}
     {% for a in answers %}
+        {{ forloop.counter }}
         <p>{{ a }}</p>
     {% endfor %}
 
-<a href="{% url 'index' %}">RETURN TO INDEX PAGE</a>
+{% include "index_redirect.html" %}
 {% endblock %}

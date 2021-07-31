@@ -4,5 +4,5 @@
         <p>{{ q }}</p>
     {% endfor %}
 
-<a href="{% url 'index' %}">RETURN TO INDEX PAGE</a>
+{% include "index_redirect.html" %}
 {% endblock %}

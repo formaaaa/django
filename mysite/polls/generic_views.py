@@ -1,7 +1,6 @@
-from django.views.generic import ListView, TemplateView
-from django.urls import reverse_lazy
+from django.views.generic import FormView, ListView, TemplateView
+from django.urls import reverse, reverse_lazy
 from django.http import HttpResponseRedirect
-from django.views.generic import FormView
 
 from polls.forms import QuestionForm, AnswerForm, PollForm
 from polls.models import Question, Poll, Answer
@@ -32,7 +31,7 @@ class AnswerFormView(FormView):
     def form_valid(self, form):
         answer_text_in_form = form.cleaned_data["answer_text"]
         question_passed_in_form = form.cleaned_data["question"]
-        Question.objects.create(
+        Answer.objects.create(
             answer_text=answer_text_in_form,
             question=question_passed_in_form,
         )
@@ -46,7 +45,7 @@ class PollFormView(FormView):
 
     def form_valid(self, form):
         name_passed_in_form = form.cleaned_data["name"]
-        Question.objects.create(name=name_passed_in_form)
+        Poll.objects.create(name=name_passed_in_form)
         return HttpResponseRedirect(self.get_success_url())
 
 

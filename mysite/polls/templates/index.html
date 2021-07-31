@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
     <p>HELLO HELLO WELCOME</p>
-    <p><a href="{% url 'polls' %}">REDIRECT TO POLLS</a></p>
-    <p><a href="{% url 'questions' %}">REDIRECT TO QUESTIONS</a></p>
-    <p><a href="{% url 'answers' %}">REDIRECT TO ANSWERS</a></p>
+    <p><a href="{% url 'polls:polls' %}">REDIRECT TO POLLS</a></p>
+    <p><a href="{% url 'polls:questions' %}">REDIRECT TO QUESTIONS</a></p>
+    <p><a href="{% url 'polls:answers' %}">REDIRECT TO ANSWERS</a></p>
 {% endblock %}

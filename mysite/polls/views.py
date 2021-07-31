@@ -1,8 +1,8 @@
 from django.shortcuts import render, reverse, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 
-from polls.forms import NameForm, PollForm, QuestionForm, AnswerForm
-from polls.models import Poll, Question, Answer
+from polls.models import Answer, Poll, Question
+from polls.forms import PollForm, NameForm, QuestionForm, AnswerForm
 
 
 def index(request):
@@ -80,7 +80,7 @@ def poll_form(request):
     if form.is_valid():
         name_passed_in_form = form.cleaned_data["name"]
         Poll.object.create(name=name_passed_in_form)
-        return redirect('generic_polls:poll_list_view')
+        return redirect('generic_polls:poll-list-view')
     return render(
         request,
         template_name="form.html",
@@ -98,7 +98,7 @@ def question_form(request):
             question_text=question_passed_in_form,
             pub_date=date_passed_in_form,
             poll=poll_passed_in_form)
-        return redirect('generic_polls:question_list_view')
+        return redirect('generic_polls:question-list-view')
     return render(
         request,
         template_name="form.html",
@@ -114,7 +114,7 @@ def answer_form(request):
         Answer.objects.create(
             answer_text=answer_text_in_form,
             question=question_passed_in_form)
-        return redirect('generic_polls:answer_list_view')
+        return redirect('generic_polls:answer-list-view')
     return render(
         request,
         template_name="form.html",

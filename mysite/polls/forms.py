@@ -3,6 +3,7 @@ import pytz
 from django import forms
 from django.core.exceptions import ValidationError
 from polls.models import Poll, Question
+utc = pytz.UTC
 
 
 def capitalized_validator(value):
@@ -69,3 +70,9 @@ class QuestionForm(forms.Form):
 class AnswerForm(forms.Form):
     answer_text = forms.CharField(max_length=128, validators=[lowercase_validator])
     question = forms.ModelChoiceField(queryset=Question.objects.all())
+
+# class QuestionForm(forms.ModelForm):
+#
+#     class Meta:
+#         model = Questionfields = "__all__"
+
