@@ -22,6 +22,7 @@ class PollTemplateView(TemplateView):
 class PollListView(ListView):
     template_name = "list.html"
     model = Poll
+    extra_context = {"detail_url": "generic_polls:poll-detail-view"}
 
 
 class PollFormView(FormView):
@@ -40,7 +41,6 @@ class PollCreateView(CreateView):
     template_name = "form.html"
     success_url = reverse_lazy("generic_polls:poll-list-view")
     form_class = PollForm
-
 
 
 class PollDetailView(DetailView):
@@ -69,6 +69,7 @@ class QuestionTemplateView(TemplateView):
 class QuestionListView(ListView):
     template_name = "list.html"
     model = Question
+    extra_context = {"detail_url": "generic_polls:question-detail-view"}
 
 
 class QuestionFormView(FormView):
@@ -99,6 +100,9 @@ class QuestionCreateView(CreateView):
 class QuestionDetailView(DetailView):
     model = Question
     template_name = "question.html"
+    # extra_context = {
+    #     "detail_url": "generic_polls:question-"
+    # }
 
 
 class QuestionUpdateView(UpdateView):
@@ -122,6 +126,7 @@ class AnswerTemplateView(TemplateView):
 class AnswerListView(ListView):
     template_name = "list.html"
     model = Answer
+    extra_context = {"detail_url": "generic_polls:answer-detail-view"}
 
 
 class AnswerFormView(FormView):
