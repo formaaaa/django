@@ -1,4 +1,5 @@
 {% extends "base.html" %}
 {% block content %}
-    {{ object }}
+    <a href="{% url 'generic_polls:question-delete-view' pk=question.pk %}">Delete question: {{ question }} </a>
+    <a href="{% url 'generic_polls:question-update-view' pk=question.pk %}">Update question: {{ question }} </a>
 {% endblock %}

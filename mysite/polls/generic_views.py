@@ -42,9 +42,10 @@ class PollCreateView(CreateView):
     form_class = PollForm
 
 
+
 class PollDetailView(DetailView):
     model = Poll
-    template_name = "object.html"
+    template_name = "poll.html"
 
 
 class PollUpdateView(UpdateView):
@@ -97,7 +98,7 @@ class QuestionCreateView(CreateView):
 
 class QuestionDetailView(DetailView):
     model = Question
-    template_name = "object.html"
+    template_name = "question.html"
 
 
 class QuestionUpdateView(UpdateView):
@@ -147,7 +148,7 @@ class AnswerCreateView(CreateView):
 
 class AnswerDetailView(DetailView):
     model = Answer
-    template_name = "objects.html"
+    template_name = "answer.html"
 
 
 class AnswerUpdateView(UpdateView):
