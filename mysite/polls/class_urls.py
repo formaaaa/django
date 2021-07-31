@@ -6,6 +6,12 @@ app_name = "class_polls"
 
 urlpatterns = [
     path("poll-class-view/", class_views.PollView.as_view(), name="poll-class-view"),
+    path("poll-class-form-view/", class_views.PollFormView.as_view(), name="poll-class-form-view"),
     path("question-class-view/", class_views.QuestionView.as_view(), name="question-class-view"),
+    path("question-class-form-view/", class_views.QuestionFormView.as_view(), name="question-class-form-view"),
+    path("question-class-detail-view/<pk>",
+         class_views.QuestionDetailView.as_view(),
+         name="question-class-detail-view"),
     path("answer-class-view/", class_views.AnswerView.as_view(), name="answer-class-view"),
+    path("answer-class-form-view/", class_views.AnswerFormView.as_view(), name="answer-class-form-view"),
 ]

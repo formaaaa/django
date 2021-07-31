@@ -1,4 +1,4 @@
-from django.views.generic import FormView, ListView, TemplateView
+from django.views.generic import FormView, ListView, TemplateView, CreateView
 from django.urls import reverse, reverse_lazy
 from django.http import HttpResponseRedirect
 
@@ -77,3 +77,16 @@ class QuestionTemplateView(TemplateView):
 class QuestionListView(ListView):
     template_name = "list.html"
     model = Question
+
+
+class QuestionCreateView(CreateView):
+    model = Question
+    template_name = "form.html"
+    # fields = "__all__"
+    success_url = reverse_lazy("generic_polls:question-list-view")
+    form_class = QuestionForm  #musi być klasą dziedziczącą po ModelForm
+
+
+
+
+

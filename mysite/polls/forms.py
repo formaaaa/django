@@ -42,7 +42,7 @@ class PollForm(forms.Form):
         return self.cleaned_data["name"].upper()
 
 
-class QuestionForm(forms.Form):
+class QuestionForm(forms.ModelForm):
     question_text = forms.CharField(max_length=128, validators=[capitalized_validator])
     pub_date = PastDateField(widget=forms.TextInput(attrs={'placeholder': 'eg.2006-10-25 14:30:59'}))
     poll = forms.ModelChoiceField(queryset=Poll.objects.all())
@@ -65,6 +65,11 @@ class QuestionForm(forms.Form):
                 self.add_error("pub_date", "Can't be a date from past")
                 raise ValidationError("Form invalid. Correct errors and submit again")
         return cleaned_data
+
+    class Meta:
+        model = Question
+        fields = "__all__"
+
 
 
 class AnswerForm(forms.Form):

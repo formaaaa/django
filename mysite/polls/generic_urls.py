@@ -12,4 +12,5 @@ urlpatterns = [
     path('question-template-view/', generic_views.QuestionTemplateView.as_view(), name="question-template-view"),
     path('question-list-view/', generic_views.QuestionListView.as_view(), name="question-list-view"),
     path('question-form-view/', generic_views.QuestionFormView.as_view(), name="question-form-view"),
+    path('question-create-view/', generic_views.QuestionCreateView.as_view(), name="question-create-view"),
 ]
