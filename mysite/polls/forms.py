@@ -3,6 +3,7 @@ import pytz
 from django import forms
 from django.core.exceptions import ValidationError
 from polls.models import Poll, Question
+
 utc = pytz.UTC
 
 
@@ -35,11 +36,15 @@ class NameForm(forms.Form):
     birth_date = forms.DateTimeField(widget=forms.TextInput(attrs={'placeholder': 'eg.2006-10-25 14:30:59'}))
 
 
-class PollForm(forms.Form):
+class PollForm(forms.ModelForm):
     name = LowerCaseLetterField(max_length=128)
 
     def clean_name(self):
         return self.cleaned_data["name"].upper()
+
+    class Meta:
+        model = Question
+        fields = "__all__"
 
 
 class QuestionForm(forms.ModelForm):
@@ -71,13 +76,15 @@ class QuestionForm(forms.ModelForm):
         fields = "__all__"
 
 
-
-class AnswerForm(forms.Form):
+class AnswerForm(forms.ModelForm):
     answer_text = forms.CharField(max_length=128, validators=[lowercase_validator])
     question = forms.ModelChoiceField(queryset=Question.objects.all())
+
+    class Meta:
+        model = Question
+        fields = "__all__"
 
 # class QuestionForm(forms.ModelForm):
 #
 #     class Meta:
 #         model = Questionfields = "__all__"
-

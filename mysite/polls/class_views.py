@@ -1,4 +1,5 @@
-from django.shortcuts import render, redirect
+from django.http import HttpResponse
+from django.shortcuts import get_object_or_404, render, redirect
 from django.views import View
 
 from polls.models import Poll, Question, Answer
@@ -174,8 +175,54 @@ class QuestionFormView(View):
 
 class QuestionDetailView(View):
     def get(self, request, pk):
+        question = get_object_or_404(Question, pk=pk)
         return render(
             request,
             template_name='question.html',
-            context={"question": Question.objects.get(pk=pk)}
+            context={"question": question}
         )
+
+
+class QuestionUpdateView(View):
+
+    def get(self, request, pk):
+        form = QuestionForm()
+        get_object_or_404(Question, pk=pk)
+        return render(
+            request,
+            template_name='form.html',
+            context={"form": form}
+        )
+
+    def post(self, request, pk):
+        form = QuestionForm(request.POST)
+        if form.is_valid():
+            q = Question.objects.get(pk=pk)
+            q.question_text = form.cleaned_data["question_text"]
+            q.pub_date = form.cleaned_data["pub_date"]
+            q.poll = form.cleaned_data["poll"]
+            q.save()
+            return redirect("class_polls:question-class-view")
+
+
+class QuestionDeleteView(View):
+    def get(self, request, pk):
+        get_object_or_404(Question, pk=pk)
+        return render(
+            request,
+            template_name='delete.html'
+        )
+
+    def post(self, request, pk):
+            q = Question.objects.get(pk=pk)
+            q.delete()
+            return redirect("class_polls:question-class-view")
+
+
+# class PollDetailView(View):
+#     def get(self, request, pk):
+#         return render(
+#             request,
+#             template_name='question.html',
+#             context={"question": Question.objects.get(pk=pk)}
+#         )
