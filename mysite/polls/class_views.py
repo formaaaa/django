@@ -1,6 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render, redirect
 from django.views import View
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from polls.models import Poll, Question, Answer
 from polls.forms import AnswerForm, QuestionForm, PollForm

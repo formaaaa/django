@@ -1,11 +1,13 @@
 from django.shortcuts import render, reverse, redirect
 from django.http import HttpResponse, HttpResponseRedirect
+from django.contrib.auth.decorators import login_required
 
 from polls.models import Answer, Poll, Question
 from polls.forms import PollForm, NameForm, QuestionForm, AnswerForm
 
 
 def index(request):
+    print(request.user.is_authenticated)
     return render(
         request,
         template_name="index.html"
@@ -64,6 +66,7 @@ def answers(request):
     )
 
 
+@login_required(login_url="/accounts/login/")
 def get_name(request):
     form = NameForm(request.POST or None)
     if form.is_valid():

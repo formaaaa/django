@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
+#from django.contrib.auth.views import LoginView
 
 from polls.views import hello
 
@@ -24,4 +25,7 @@ urlpatterns = [
     path('polls/', include('polls.urls')),
     path('polls/', include('polls.class_urls')),
     path('polls/', include('polls.generic_urls')),
+    path('accounts/', include('accounts.urls')),
+    # path('accounts/login/', LoginView.as_view(), name='login'),
+    path('accounts/', include('django.contrib.auth.urls'))
 ]

@@ -9,12 +9,14 @@ from django.views.generic import (
 )
 from django.urls import reverse_lazy
 from django.http import HttpResponseRedirect
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from polls.forms import QuestionForm, AnswerForm, PollForm
 from polls.models import Question, Poll, Answer
 
 
-class PollTemplateView(TemplateView):
+class PollTemplateView(LoginRequiredMixin, TemplateView):
+    # login_url = reverse_lazy(polls:)  #przekierowanie
     template_name = "polls.html"
     extra_context = {"polls": Poll.objects.all()}
 
